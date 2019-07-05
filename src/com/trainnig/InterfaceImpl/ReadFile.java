@@ -5,13 +5,15 @@ import java.io.File;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-import com.training.Bean.InvoiceData;
 import com.training.DAO.InvoiceDataDAO;
 import com.training.Interface.FileReaderInterface;
+import com.training.model.InvoiceData;
+
 
 public class ReadFile implements FileReaderInterface {
 
 	@Override
+	@SuppressWarnings(value = { "" })
 	public void FileReader(String fileName) throws Exception {
 		try (PDDocument document = PDDocument.load(new File("D:/Workspace/pdf/" + fileName))) {
 
@@ -34,21 +36,17 @@ public class ReadFile implements FileReaderInterface {
 				for (int i = 0; i < lines.length; i++) {
 					if (lines[i].equals("Invoice No")) {
 						data.setInvoiceNum(lines[i + 1]);
-						System.out.println("Invoice number: " + lines[i + 1]);
 
 					} else if (lines[i].equals("Invoice Date")) {
 						data.setInvoiceDate(lines[i + 1]);
-						System.out.println("Invoice date: " + lines[i + 1]);
 					}
 
 					else if (lines[i].equals("Customer P.O.")) {
 						data.setCustomerPO(lines[i + 1]);
-						System.out.println("Customer PO: " + lines[i + 1]);
 					}
 
 					else if (lines[i].equals("Total Invoice")) {
 						data.setAmount(lines[i + 1]);
-						System.out.println("Total invoice amount: " + lines[i + 1]);
 					}
 
 					else if (lines[i].equals("Sold To")) {
@@ -60,7 +58,6 @@ public class ReadFile implements FileReaderInterface {
 							address = lines[index];
 						}
 						data.setSoldToAddress(soldToAddress);
-						System.out.println("Sold To: " + lines[i + 1]);
 					}
 
 					else if (lines[i].equals("Ship To")) {
@@ -72,7 +69,6 @@ public class ReadFile implements FileReaderInterface {
 							address = lines[index];
 						}
 						data.setShipToAddress(shiftToAddress);
-						System.out.println("Ship To: " + lines[i + 1]);
 					}
 
 					else if (lines[i].equals("Remit To")) {
@@ -84,16 +80,21 @@ public class ReadFile implements FileReaderInterface {
 							address = lines[index];
 						}
 						data.setRemitToAddress(remitToAddress);
-						System.out.println("Remit To: " + lines[i + 1]);
 					}
 					data.setEmailFrmAddress(InvoiceReader.emailFrmAddress);
 					if (!data.getAmount().isEmpty() && !data.getCustomerPO().isEmpty()
 							&& !data.getInvoiceDate().isEmpty() && !data.getInvoiceDate().isEmpty()
 							&& !data.getInvoiceNum().isEmpty() && !data.getRemitToAddress().isEmpty()
 							&& !data.getShipToAddress().isEmpty()) {
+						System.out.println("Invoice number: \n" + data.getInvoiceNum() + "\n\nInvoice date: \n"
+								+ data.getInvoiceDate() + "\n\nCustomer PO: \n" + data.getCustomerPO()
+								+ "\n\nSold To: \n" + data.getSoldToAddress() + "\nShip To: \n"
+								+ data.getShipToAddress() + "\nRemit To: \n" + data.getRemitToAddress()
+								+ "\nTotal Amount: \n" + data.getAmount());
 						System.out.println("======================================");
 						InvoiceDataDAO.insertData(data);
 						data = new InvoiceData();
+						shiftToAddress = remitToAddress = soldToAddress = "";
 					}
 				}
 			}

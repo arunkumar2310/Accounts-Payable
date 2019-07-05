@@ -2,7 +2,8 @@ package com.training.DAO;
 
 import java.sql.*;
 import java.util.Properties;
-import com.training.Bean.InvoiceData;
+
+import com.training.model.InvoiceData;
 
 @SuppressWarnings("unused")
 public class InvoiceDataDAO {
@@ -19,7 +20,6 @@ public class InvoiceDataDAO {
 		connectionProps.put("user", userName);
 		connectionProps.put("password", password);
 		connection = DriverManager.getConnection(url, connectionProps);
-		System.out.println("Database connections successful");
 
 		return connection;
 	}
@@ -43,7 +43,7 @@ public class InvoiceDataDAO {
 				System.out.println("Data inserted sucessfully");
 			}
 		} catch (SQLIntegrityConstraintViolationException e) {
-			System.out.println("Primary key value should be unique");
+			System.out.println("Primary key value should be unique. Can not update into DB.\n");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("Failed to connect to database" + e);

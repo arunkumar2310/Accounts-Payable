@@ -57,11 +57,6 @@ public class InvoiceReader implements InvoiceReaderInterface {
 				System.out.println("From: " + message.getFrom()[0]);
 				String temp = message.getFrom()[0] + "";
 				emailFrmAddress = temp.substring(temp.indexOf('<') + 1, temp.indexOf('>'));
-				// // Iterate recipients
-				// System.out.println("To: ");
-				// for (int j = 0; j < toAddress.length; j++) {
-				// System.out.println(toAddress[j].toString());
-				// }
 
 				Multipart multipart = (Multipart) message.getContent();
 				for (int k = 0; k < multipart.getCount(); k++) {
@@ -70,13 +65,8 @@ public class InvoiceReader implements InvoiceReaderInterface {
 					if (bodyPart.getDisposition() != null
 							&& bodyPart.getDisposition().equalsIgnoreCase(Part.ATTACHMENT)) {
 						fileName = bodyPart.getFileName();
-						System.out.println("--" + fileName);
-						System.out.println("file name " + bodyPart.getFileName());
-						System.out.println("size " + bodyPart.getSize());
-						System.out.println("content type " + bodyPart.getContentType());
 						InputStream stream = (InputStream) bodyPart.getInputStream();
 						File targetFile = new File("D://Workspace//pdf//" + bodyPart.getFileName());
-						// System.out.println(fileName);
 						java.nio.file.Files.copy(stream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 					}
 				}

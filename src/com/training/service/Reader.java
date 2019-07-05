@@ -21,9 +21,9 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import com.training.DAO.ApprovalDAO;
 import com.training.DAO.InvoiceDataDAO;
+import com.training.model.InvoiceData;
 import com.trainnig.InterfaceImpl.InvoiceReader;
 import com.sun.mail.util.MailConnectException;
-import com.training.Bean.InvoiceData;
 
 @SuppressWarnings("unused")
 public class Reader {

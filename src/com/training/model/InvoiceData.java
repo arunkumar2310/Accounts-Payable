@@ -1,4 +1,4 @@
-package com.training.Bean;
+package com.training.model;
 
 public class InvoiceData {
 	private String invoiceDate = "";
