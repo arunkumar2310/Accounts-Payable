@@ -15,7 +15,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.trainnig.InterfaceImpl.InvoiceReader;
+import com.training.InterfaceImpl.InvoiceReader;
 
 public class ApprovalDAO {
 	public static Connection connection;

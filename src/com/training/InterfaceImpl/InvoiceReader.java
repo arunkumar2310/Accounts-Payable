@@ -1,4 +1,4 @@
-package com.trainnig.InterfaceImpl;
+package com.training.InterfaceImpl;
 
 import java.io.File;
 import java.io.InputStream;
